@@ -1,4 +1,5 @@
 apply plugin: 'net.corda.plugins.cordapp'
+apply plugin: 'net.corda.plugins.cordformation'
 apply plugin: 'net.corda.plugins.quasar-utils'
 
 cordapp {
@@ -24,10 +25,10 @@ sourceSets {
         }
     }
     integrationTest {
-        kotlin {
+        java {
             compileClasspath += main.output + test.output
             runtimeClasspath += main.output + test.output
-            srcDir file('src/integrationTest/kotlin')
+            srcDir file('src/integrationTest/java')
         }
     }
 }
@@ -38,8 +39,6 @@ configurations {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
     testCompile "junit:junit:$junit_version"
 
     // Corda dependencies.
