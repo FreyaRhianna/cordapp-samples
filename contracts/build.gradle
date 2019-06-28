@@ -15,6 +15,12 @@ cordapp {
     }
 }
 
+test.jvmArgs = ["-ea", "-javaagent:../lib/quasar.jar"]
+test {
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
 sourceSets {
     main {
         resources {
@@ -38,6 +44,5 @@ dependencies {
     cordaCompile "$tokens_release_group:tokens-contracts:$tokens_release_version"
     cordapp "$tokens_release_group:tokens-money:$tokens_release_version"
     cordapp "$tokens_release_group:tokens-workflows:$tokens_release_version"
-
 }
 

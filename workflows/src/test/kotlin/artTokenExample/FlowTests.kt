@@ -1,6 +1,6 @@
 package artTokenExample
 
-import artTokenExample.flows.Responder
+/*import artTokenExample.flows.Responder
 import net.corda.testing.node.MockNetwork
 import net.corda.testing.node.MockNetworkParameters
 import net.corda.testing.node.TestCordapp
@@ -33,3 +33,5 @@ class FlowTests {
 
     }
 }
+
+*/

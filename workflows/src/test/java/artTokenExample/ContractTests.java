@@ -1,4 +1,4 @@
-package artTokenExample;
+/*package artTokenExample;
 
 import net.corda.testing.node.MockServices;
 import org.junit.Test;
@@ -10,4 +10,4 @@ public class ContractTests {
     public void dummyTest() {
 
     }
-}
+}*/

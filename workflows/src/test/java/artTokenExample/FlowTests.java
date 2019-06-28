@@ -1,4 +1,4 @@
-package artTokenExample;
+/*package artTokenExample;
 
 import artTokenExample.flows.Responder;
 import com.google.common.collect.ImmutableList;
@@ -38,3 +38,4 @@ public class FlowTests {
 
     }
 }
+*/

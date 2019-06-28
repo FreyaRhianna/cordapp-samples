@@ -1,4 +1,4 @@
-package com.template.secondary.flows
+package artTokenExample.flows
 
 import co.paralleluniverse.fibers.Suspendable
 import com.r3.corda.lib.tokens.contracts.states.EvolvableTokenType
