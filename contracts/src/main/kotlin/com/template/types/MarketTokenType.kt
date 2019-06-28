@@ -1,6 +1,7 @@
 package com.template.types
 
 import com.r3.corda.lib.tokens.money.Money
+import com.r3.corda.lib.tokens.contracts.types.TokenType
 
 /*
 Defining a Token for a digital art market - Similar to [DigitalCurrency]
@@ -16,11 +17,14 @@ data class MarketTokenType(
     // Notes: companion objects are similar to static methods (code not related to an instantiation
     // registry contains <code>: MarketTokenType(), pairs where the instantiated
     // token conforms to the correct fractionDigits.
+    // PXL - pixelated art
+    // MUS - Music
+    // MME - multimedia works
     companion object {
         private val registry = mapOf(
-                Pair("PXL", MarketTokenType("PXL", "Pixely", 6)),
-                Pair("MUS", MarketTokenType("MUS", "Musicx", 6)),
-                Pair("MME", MarketTokenType("MME", "MultMee", 6))
+                Pair("PXL", MarketTokenType("PXL", "Pixely", 0)),
+                Pair("MUS", MarketTokenType("MUS", "Musicx", 0)),
+                Pair("MME", MarketTokenType("MME", "MultMee", 0))
         )
 
         fun getInstance(code: String): MarketTokenType {

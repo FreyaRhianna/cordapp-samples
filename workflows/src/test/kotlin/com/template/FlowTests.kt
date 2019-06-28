@@ -1,5 +1,6 @@
 package com.template
 
+import com.template.flows.IssueMarketTokenFlow
 import com.template.flows.Responder
 import net.corda.testing.node.MockNetwork
 import net.corda.testing.node.MockNetworkParameters
@@ -29,7 +30,6 @@ class FlowTests {
     fun tearDown() = network.stopNodes()
 
     @Test
-    fun `dummy test`() {
-
+    fun checkTokenSize() {
     }
 }
