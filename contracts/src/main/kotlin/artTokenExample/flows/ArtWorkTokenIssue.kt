@@ -2,9 +2,6 @@ package artTokenExample.flows
 
 import co.paralleluniverse.fibers.Suspendable
 import com.r3.corda.lib.tokens.contracts.states.EvolvableTokenType
-import com.r3.corda.lib.tokens.contracts.states.FungibleToken
-import com.r3.corda.lib.tokens.contracts.states.NonFungibleToken
-import com.r3.corda.lib.tokens.contracts.types.TokenPointer
 import com.r3.corda.lib.tokens.contracts.utilities.heldBy
 import com.r3.corda.lib.tokens.contracts.utilities.issuedBy
 import com.r3.corda.lib.tokens.contracts.utilities.of
@@ -41,11 +38,14 @@ class ArtWorkTokenIssue(
 }
 
 @StartableByRPC
-class ArtWorkTokenCreate(val data: String) : FlowLogic<SignedTransaction>() {
+class ArtWorkTokenCreate(
+        val data: String,
+        val valuation: Amount<FiatCurrency>,
+        val artist: String
+) : FlowLogic<SignedTransaction>() {
     override fun call(): SignedTransaction {
         val notary = serviceHub.networkMapCache.notaryIdentities.first()
-        val amount  = Amount(1000, FiatCurrency(Currency.getInstance("USD"))) //swap out for custom token
-        val artTokenType = ArtWorkTokenType(data, amount, "PICASSO", ourIdentity)
+        val artTokenType = ArtWorkTokenType(data, valuation, artist, ourIdentity)
         return subFlow(CreateEvolvableToken(artTokenType withNotary notary))
     }
 

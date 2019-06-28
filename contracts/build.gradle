@@ -15,11 +15,13 @@ cordapp {
     }
 }
 
-test.jvmArgs = ["-ea", "-javaagent:../lib/quasar.jar"]
+//test.jvmArgs = ["-ea", "-javaagent:../lib/quasar.jar"]
 test {
     testLogging {
+        outputs.upToDateWhen {false}
         events "passed", "skipped", "failed"
     }
+    jvmArgs(["-ea", "-javaagent:../lib/quasar.jar"])
 }
 sourceSets {
     main {
@@ -28,6 +30,7 @@ sourceSets {
         }
     }
 }
+
 
 dependencies {
     // Kotlin.
