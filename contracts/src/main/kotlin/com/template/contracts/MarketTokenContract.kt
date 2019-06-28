@@ -1,4 +1,4 @@
-package com.template
+package com.template.contracts
 
 import com.r3.corda.lib.tokens.contracts.FungibleTokenContract
 import com.template.types.MarketTokenType
