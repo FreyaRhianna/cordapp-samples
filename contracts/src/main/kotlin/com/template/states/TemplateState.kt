@@ -1,4 +1,4 @@
-package com.template.types
+package com.template.states
 
 import com.template.contracts.TemplateContract
 import net.corda.core.contracts.BelongsToContract
