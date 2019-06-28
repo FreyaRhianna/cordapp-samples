@@ -11,8 +11,8 @@ import com.r3.corda.lib.tokens.money.FiatCurrency
 @BelongsToContract(ArtWorkTokenTypeContract::class)
 class ArtWorkTokenType (
         val quality: String,
-        val valuation : Amount<FiatCurrency>,
-        val artist:String,
+        val valuation : Amount<FiatCurrency>, //eventually this will be our issued tokens?
+        val artist:String,  //this will be not editable in future states
         val maintainer: Party,
         override val fractionDigits: Int = 0,
         override val linearId: UniqueIdentifier = UniqueIdentifier())
