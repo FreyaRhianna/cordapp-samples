@@ -76,7 +76,7 @@ sourceSets {
 dependencies {
     // Kotlin.
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-
+    compileClasspath fileTree(dir: 'lib/dependencies', include: '*.jar')
     // Corda dependencies.
     cordaCompile "$corda_release_group:corda-core:$corda_release_version"
     cordaCompile "$corda_release_group:corda-node-api:$corda_release_version"
