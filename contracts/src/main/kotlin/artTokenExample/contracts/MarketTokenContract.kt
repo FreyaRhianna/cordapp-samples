@@ -1,2 +1,2 @@
-package artTokenExample.contracts
+//package artTokenExample.contracts
 

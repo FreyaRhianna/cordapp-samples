@@ -1,26 +1,18 @@
 package artTokenExample.flows
 
 import co.paralleluniverse.fibers.Suspendable
-import com.r3.corda.lib.tokens.contracts.states.EvolvableTokenType
-import com.r3.corda.lib.tokens.contracts.utilities.heldBy
-import com.r3.corda.lib.tokens.contracts.utilities.issuedBy
-import com.r3.corda.lib.tokens.contracts.utilities.of
 import com.r3.corda.lib.tokens.contracts.utilities.withNotary
 import com.r3.corda.lib.tokens.money.FiatCurrency
 import com.r3.corda.lib.tokens.workflows.flows.evolvable.CreateEvolvableToken
 import com.r3.corda.lib.tokens.workflows.flows.shell.IssueTokens
 import artTokenExample.states.ArtWorkTokenType
-import com.r3.corda.lib.tokens.workflows.flows.issue.IssueTokensFlow
 import net.corda.core.contracts.Amount
-import net.corda.core.flows.AbstractStateReplacementFlow
 import net.corda.core.flows.FlowLogic
-import net.corda.core.flows.SignTransactionFlow
 import net.corda.core.flows.StartableByRPC
 import net.corda.core.identity.Party
 import net.corda.core.node.services.queryBy
 import net.corda.core.node.services.vault.QueryCriteria
 import net.corda.core.transactions.SignedTransaction
-import net.corda.core.utilities.ProgressTracker
 import java.util.*
 
 @StartableByRPC
