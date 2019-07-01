@@ -1,8 +1,15 @@
 package artTokenExample.flows
 
 import artTokenExample.states.ArtWorkTokenType
+import com.r3.corda.lib.tokens.contracts.states.EvolvableTokenType
+import com.r3.corda.lib.tokens.contracts.types.TokenType
+import com.r3.corda.lib.tokens.contracts.utilities.issuedBy
+import com.r3.corda.lib.tokens.contracts.utilities.of
+import com.r3.corda.lib.tokens.contracts.utilities.sumIssuedTokensOrNull
 import com.r3.corda.lib.tokens.money.FiatCurrency
+import com.r3.corda.lib.tokens.workflows.utilities.tokenAmountsByToken
 import net.corda.core.contracts.Amount
+import net.corda.core.contracts.FungibleState
 
 import net.corda.core.node.services.queryBy
 import net.corda.testing.common.internal.testNetworkParameters
@@ -50,7 +57,6 @@ class FlowTests {
         network.runNetwork()
         val signedTransaction = transactionFut.get()
         assertEquals(1, signedTransaction.tx.outputStates.size)
-
     }
 
     @Test
@@ -72,16 +78,29 @@ class FlowTests {
 
     @Test
     fun artTokenIssuingOwnerShip(){
-        var transactionFut = nodeA.startFlow(ArtWorkTokenCreate("IDK",amount,"PICASSO"))
+        nodeA.startFlow(ArtWorkTokenCreate("IDK",amount,"PICASSO"))
         network.runNetwork()
-        val signedTransaction = transactionFut.get()
         val state = nodeA.services.vaultService.queryBy<ArtWorkTokenType>().states.get(0)
         val artWorkState = state.state.data
         var issuenceFut = nodeA.startFlow(ArtWorkTokenIssue(artWorkState.linearId.toString(),10, nodeB.info.legalIdentities.get(0)))
         network.runNetwork()
         val issuedTx = issuenceFut.get()
         assert(issuedTx.tx.requiredSigningKeys.contains(nodeA.info.legalIdentities.get(0).owningKey))
+    }
 
+    @Test
+    fun artTokenIssuenceIntVault(){
+        nodeA.startFlow(ArtWorkTokenCreate("IDK",amount,"PICASSO"))
+        network.runNetwork()
+        val state = nodeA.services.vaultService.queryBy<ArtWorkTokenType>().states.get(0)
+        val artWorkState = state.state.data
+        val artWorkPointer = state.state.data.toPointer<ArtWorkTokenType>()
+        var issuenceFut = nodeA.startFlow(ArtWorkTokenIssue(artWorkState.linearId.toString(),10, nodeB.info.legalIdentities.get(0)))
+        network.runNetwork()
+        val amountFromToken = nodeB.services.vaultService.tokenAmountsByToken(artWorkPointer).states.map{ it.state.data.amount}
+        //val amountFromState = nodeB.services.vaultService.queryBy<FungibleState<ArtWorkTokenType>>().states.get(0)
+        assertEquals(amountFromToken.sumIssuedTokensOrNull(), 10 of artWorkPointer issuedBy nodeA.info.legalIdentities.get(0))
+        //assert(issuedTx.tx.requiredSigningKeys.contains(nodeA.info.legalIdentities.get(0).owningKey))
     }
 
 
