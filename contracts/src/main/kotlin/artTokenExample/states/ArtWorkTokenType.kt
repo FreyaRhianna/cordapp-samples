@@ -7,11 +7,12 @@ import net.corda.core.contracts.BelongsToContract
 import net.corda.core.contracts.UniqueIdentifier
 import net.corda.core.identity.Party
 import com.r3.corda.lib.tokens.money.FiatCurrency
+import fixedTokenExample.types.MarketTokenType
 
 @BelongsToContract(ArtWorkTokenTypeContract::class)
 class ArtWorkTokenType (
         val quality: String,
-        val valuation : Amount<FiatCurrency>, //eventually this will be our issued tokens?
+        val valuation : Amount<MarketTokenType>, //eventually this will be our issued tokens?
         val artist:String,  //this will be not editable in future states
         val maintainer: Party,
         override val fractionDigits: Int = 0,

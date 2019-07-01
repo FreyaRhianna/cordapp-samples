@@ -6,6 +6,7 @@ import com.r3.corda.lib.tokens.money.FiatCurrency
 import com.r3.corda.lib.tokens.workflows.flows.evolvable.CreateEvolvableToken
 import com.r3.corda.lib.tokens.workflows.flows.shell.IssueTokens
 import artTokenExample.states.ArtWorkTokenType
+import fixedTokenExample.types.MarketTokenType
 import net.corda.core.contracts.Amount
 import net.corda.core.flows.FlowLogic
 import net.corda.core.flows.StartableByRPC
@@ -41,7 +42,7 @@ class ArtWorkTokenIssue(
 @StartableByRPC
 class ArtWorkTokenCreate(
         val data: String,
-        val valuation: Amount<FiatCurrency>,
+        val valuation: Amount<MarketTokenType>,
         val artist: String
 ) : FlowLogic<SignedTransaction>() {
     override fun call(): SignedTransaction {

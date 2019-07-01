@@ -6,6 +6,7 @@ import com.r3.corda.lib.tokens.contracts.utilities.of
 import com.r3.corda.lib.tokens.contracts.utilities.sumIssuedTokensOrNull
 import com.r3.corda.lib.tokens.money.FiatCurrency
 import com.r3.corda.lib.tokens.workflows.utilities.tokenAmountsByToken
+import fixedTokenExample.types.MarketTokenType
 
 import net.corda.core.contracts.Amount
 
@@ -38,13 +39,13 @@ class FlowTests {
     private lateinit var nodeA: StartedMockNode;
     private lateinit var nodeB: StartedMockNode;
     private lateinit var nodeC: StartedMockNode;
-    private lateinit var amount: Amount<FiatCurrency>
+    private lateinit var amount: Amount<MarketTokenType>
     @Before
     fun setUp(){
         nodeA = network.createPartyNode()
         nodeB = network.createPartyNode()
         nodeC = network.createPartyNode()
-        amount  = Amount(1000, FiatCurrency(Currency.getInstance("USD"))) //swap out for custom tokem
+        amount  = Amount(1000, MarketTokenType.getInstance("PXL")) //swap out for custom tokem
         network.runNetwork()
     }
 
