@@ -19,21 +19,12 @@ import java.math.BigDecimal
 class IssueMarketTokenFlow(val currency: String, val quantity: Long) : FlowLogic<SignedTransaction>() {
     override val progressTracker = ProgressTracker()
 
-    // FiatCurrency is a token representing off-ledger value
     @Suspendable
     override fun call(): SignedTransaction {
-        //val token = FiatCurrency.getInstance(currency)
-        //val token = MarketTokenType.getInstance("WIBBLE")
-
-        //val issuedToken = IssuedTokenType(ourIdentity, MarketTokenType.getInstance("PXL"))
-        //val token = IssuedTokenType(ourIdentity, MarketTokenType.getInstance("PXL"))
-
         // Fungible tokens held by issuer
-        val fungtoken = FungibleToken(Amount(quantity, BigDecimal(1), IssuedTokenType(ourIdentity, MarketTokenType.getInstance(currency))), ourIdentity)
-        //val token: FungibleToken<MarketTokenType> =  (FungibleToken)MarketTokenType.getInstance("MME")
+        val fungMarkettoken = FungibleToken(Amount(quantity, BigDecimal(1), IssuedTokenType(ourIdentity, MarketTokenType.getInstance(currency))), ourIdentity)
 
         // Starts a new flow session.
-        //return subFlow(IssueTokens(amount of issuedToken issuedBy ourIdentity heldBy recipient))
-        return subFlow(IssueTokens(fungtoken))
+        return subFlow(IssueTokens(fungMarkettoken))
     }
 }

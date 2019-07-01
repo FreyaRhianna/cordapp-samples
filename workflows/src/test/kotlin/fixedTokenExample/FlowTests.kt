@@ -3,7 +3,6 @@ package fixedTokenExample
 import com.r3.corda.lib.tokens.contracts.states.FungibleToken
 import fixedTokenExample.flows.IssueMarketTokenFlow
 import fixedTokenExample.flows.Responder
-import fixedTokenExample.types.MarketTokenType
 import net.corda.testing.node.MockNetwork
 import net.corda.testing.node.MockNetworkParameters
 import net.corda.testing.node.StartedMockNode
@@ -11,30 +10,17 @@ import net.corda.testing.node.TestCordapp
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import kotlin.math.absoluteValue
 import kotlin.test.assertEquals
 
 class FlowTests {
-//    private val network = MockNetwork(MockNetworkParameters(cordappsForAllNodes = listOf(
-//            TestCordapp.findCordapp("fixedTokenExample.contracts"),
-//            TestCordapp.findCordapp("fixedTokenExample.flows"),
-//            TestCordapp.findCordapp("com.r3.corda.lib.tokens")
-//    )))
-//    private val a = network.createNode()
-//    private val b = network.createNode()
 
     init {
-//        listOf(a, b).forEach {
-//            it.registerInitiatedFlow(Responder::class.java)
-//        }
     }
 
     private lateinit var network: MockNetwork
-//    private var a: StartedMockNode? = null
-//    private var b: StartedMockNode? = null
     private lateinit var a: StartedMockNode
     private lateinit var b: StartedMockNode
-    private lateinit var marketTokenCurrency: String // type of marketToken
+    private lateinit var marketTokenCurrency: String // type of marketToken "PXL", "MUS", "MXE"
     private var quantity: Long = 0
 
     @Before
@@ -53,8 +39,6 @@ class FlowTests {
         marketTokenCurrency = "PXL"
         quantity = 1000
 
-        println("I HAVE SET a: $a")
-        println("I HAVE ALSO SET b: $b")
     }
 
     @After
@@ -68,6 +52,7 @@ class FlowTests {
         assertEquals(1, signedTransaction.tx.outputStates.size)
     }
 
+    // issuance should have no inputs
     @Test
     fun checkIssueMarketTokenZeroInput() {
         val transaction = a.startFlow(IssueMarketTokenFlow(currency = marketTokenCurrency, quantity = quantity))
@@ -75,6 +60,7 @@ class FlowTests {
         assertEquals(0, signedTransaction.tx.inputs.size)
     }
 
+    // check that token quantity is correct
     @Test
     fun checkIssueMarketTokenQuantity() {
         val transaction = a.startFlow(IssueMarketTokenFlow(currency = marketTokenCurrency, quantity = quantity))
