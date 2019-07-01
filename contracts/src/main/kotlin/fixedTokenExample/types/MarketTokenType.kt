@@ -1,8 +1,6 @@
 package fixedTokenExample.types
 
 import com.r3.corda.lib.tokens.money.Money
-import com.r3.corda.lib.tokens.contracts.types.TokenType
-
 /*
 Defining a Token for a digital art market - Similar to [DigitalCurrency]
  */

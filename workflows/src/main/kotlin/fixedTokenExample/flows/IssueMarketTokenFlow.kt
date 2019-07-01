@@ -7,12 +7,14 @@ import com.r3.corda.lib.tokens.workflows.flows.shell.IssueTokens
 import fixedTokenExample.types.MarketTokenType
 import net.corda.core.contracts.Amount
 import net.corda.core.flows.FlowLogic
+import net.corda.core.flows.InitiatingFlow
 import net.corda.core.flows.StartableByRPC
 import net.corda.core.identity.Party
 import net.corda.core.transactions.SignedTransaction
 import net.corda.core.utilities.ProgressTracker
 import java.math.BigDecimal
 
+@InitiatingFlow
 @StartableByRPC
 class IssueMarketTokenFlow(val currency: String, val quantity: Long) : FlowLogic<SignedTransaction>() {
     override val progressTracker = ProgressTracker()
